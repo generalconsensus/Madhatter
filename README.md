@@ -22,9 +22,10 @@ Madhatter is an all-in-one Behat Project Management Tool. Madhatter helps you ma
 1. Clone the repository: `git clone https://github.com/generalconsensus/Madhatter`
 2. Install the NodeJS dependencies: `npm install`.
 3. Install the Bower dependencies: `bower install`.
-4. Run the gulp build task: `gulp build`.
-5. Run the gulp default task: `gulp`. This will build any changes made automatically
-6. Run npm start. This will start electron with `electron main.js`
+4. (Temporary) If you get a Bower version check for angular, you can choose: 'angular#~1.5.0 which resolved to 1.5.3 and is required by Madhatter'
+5. Run the gulp build task: `gulp build`.
+6. Run the gulp default task: `gulp`. This will build any changes made automatically
+7. Run npm start. This will start electron with `electron main.js`
 
 Ensure your preferred web server points towards the `dist` directory.
 
