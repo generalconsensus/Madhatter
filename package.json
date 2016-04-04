@@ -7,6 +7,21 @@
   "scripts": {
     "start": "electron main.js"
   },
+    "darwin": {
+    "bundleId": "com.generalconsensus.madhatter",
+    "appCategoryType": "public.app-category.tools",
+    "copyright": "Copyright © Daniel McDermott"
+  },
+  "linux": {
+    "genericName": "Madhatter",
+    "categories": "GNOME;GTK;Development;Documentation;",
+    "keywords": "Electron;",
+    "section": "web"
+  },
+  "win": {
+    "companyName": "Daniel McDermott",
+    "copyright": "Copyright © Daniel McDermott"
+  },
   "devDependencies": {
     "electron-prebuilt": "^0.36.0",
     "bower": "^1.3.9",
@@ -28,6 +43,8 @@
     "tty.js": "0.2.15",
     "directory-tree": "0.1.1",
     "tmp": "0.0.28",
-    "xml2js": "0.4.16"
+    "xml2js": "0.4.16",
+    "electron-builder": "^2.6.0",
+    "electron-packager": "^5.2.1"
   }
 }
