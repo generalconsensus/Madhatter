@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Route configuration for the RDash module.
+ * Route configuration for the Madhatter module.
  */
 app.config(['$stateProvider', '$urlRouterProvider',
     function($stateProvider, $urlRouterProvider) {

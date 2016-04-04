@@ -4,6 +4,7 @@ app.controller('FileController', ['$scope', 'folderUpload', function ($scope, fo
 
     $scope.scanTarget = false;
     $scope.scan = function () {
+
         var folder = $scope.behatFolder;
         $scope.behatTargets = [];
         const ipcRenderer = require('electron').ipcRenderer;
