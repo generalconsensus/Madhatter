@@ -1,0 +1,43 @@
+<div class="modal-content">
+    <div class="modal-header ng-scope">
+        <h1 class="modal-title text-success">{{ testRun.outcome }}</h1>
+        <h2 class="modal-title text-primary">Feature {{ testRun.originalFile }}</h2>
+    </div>
+    <div class="modal-body ng-scope">
+        <div id="bar">
+            <div id="red">
+            </div>
+            <div id="yellow">
+            </div>
+            <div id="green">
+            </div>
+        </div>
+        <div class="screen">
+            <h4 class="text-terminal-error" ng-show="testRun.error">Original Command:</h4>
+            <p class="font">
+                {{ testRun.error.cmd }}
+            </p>
+        </div>
+        <div class="screen">
+            <h4 class="text-terminal-error" ng-show="testRun.stderr">Error</h4>
+            <p class="font" ng-repeat="response in testRun.stderr track by $index">
+                {{ response }}
+            </p>
+        </div>
+        <div class="screen">
+            <h4 class="text-terminal-error" ng-show="testRun.xml">Failures: {{ testRun.xml.testsuite.$.failures }}</h4>
+            <h4 class="text-terminal-error" ng-show="testRun.xml">Scenarios: {{ testRun.xml.testsuite.$.tests }}</h4>
+            <h4 class="text-terminal-error" ng-show="testRun.xml">Run Time: {{ testRun.xml.testsuite.$.time }}</h4>
+            <h4 class="text-terminal-error" ng-show="testRun.xml">Errors:</h4>
+            <div class="font" ng-repeat="testCase in testRun.xml.testsuite.testcase track by $index">
+                <p><h3>>>> Scenario: {{ testCase.$.name }}:</h3>
+                >>>  {{ testCase.failure[0].$.message }}</p>
+            </div>
+
+
+        </div>
+    </div>
+    <div class="modal-footer ng-scope">
+        <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+    </div>
+</div>

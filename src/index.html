@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en" ng-app="RDash">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Madhatter 1.0</title>
+  <!-- STYLES -->
+  <!-- build:css lib/css/main.min.css -->
+  <link rel="stylesheet" type="text/css" href="components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="components/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="components/rdash-ui/dist/css/rdash.min.css">
+  <link rel="stylesheet" type="text/css" href="components/angular-tree-control/css/tree-control.css">
+  <link rel="stylesheet" type="text/css" href="components/angular-tree-control/css/tree-control-attribute.css">
+  <link rel="stylesheet" type="text/css" href="less/custom/custom.less">
+  <!-- endbuild -->
+  <!-- SCRIPTS -->
+  <!-- build:js lib/js/main.min.js -->
+  <script type="text/javascript" src="components/angular/angular.min.js"></script>
+  <script type="text/javascript" src="components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+  <script type="text/javascript" src="components/angular-cookies/angular-cookies.min.js"></script>
+  <script type="text/javascript" src="components/angular-ui-router/release/angular-ui-router.min.js"></script>
+  <script type="text/javascript" src="components/angular-tree-control/angular-tree-control.js"></script>
+  <!-- endbuild -->
+  <!-- Custom Scripts -->
+  <script type="text/javascript" src="js/dashboard.js"></script>
+</head>
+<body ng-controller="MasterCtrl">
+  <div id="page-wrapper" ng-class="{'open': toggle}" ng-cloak>
+
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+      <ul class="sidebar">
+        <li class="sidebar-main">
+          <a ng-click="toggleSidebar()">
+            Madhatter 1.0
+            <span class="menu-icon glyphicon glyphicon-transfer"></span>
+          </a>
+        </li>
+        <li class="sidebar-title"><span>NAVIGATION</span></li>
+        <li class="sidebar-list">
+          <a href="#/projects">Projects <span class="menu-icon fa fa-table"></span></a>
+        </li>
+      </ul>
+      <div class="sidebar-footer">
+        <div class="col-xs-4">
+          <a href="https://github.com/generalconsensus/Madhatter" target="_blank">
+            Github
+          </a>
+        </div>
+        <div class="col-xs-4 pull-right">
+          <a href="https://github.com/generalconsensus/Madhatter/README.md" target="_blank">
+            About
+          </a>
+        </div>
+      </div>
+    </div>
+    <!-- End Sidebar -->
+
+    <div id="content-wrapper">
+      <div class="page-content">
+
+        <!-- Header Bar -->
+        <div class="row header">
+          <div class="col-xs-12">
+            <div class="user pull-right">
+              <div class="item dropdown" uib-dropdown>
+                <a href="" ng-click="openSetupModal()"><i class="fa fa-cogs"></i></a>
+                <ul class="dropdown-menu dropdown-menu-right">
+                  <li class="dropdown-header">
+                    Joe Bloggs
+                  </li>
+                  <li class="divider"></li>
+                  <li class="link">
+                    <a href="#">
+                      Profile
+                    </a>
+                  </li>
+                  <li class="link">
+                    <a href="#">
+                      Menu Item
+                    </a>
+                  </li>
+                  <li class="link">
+                    <a href="#">
+                      Menu Item
+                    </a>
+                  </li>
+                  <li class="divider"></li>
+                  <li class="link">
+                    <a href="#">
+                      Logout
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End Header Bar -->
+
+        <!-- Main Content -->
+        <div ui-view></div>
+
+      </div><!-- End Page Content -->
+    </div><!-- End Content Wrapper -->
+  </div><!-- End Page Wrapper -->
+</body>
+</html>

@@ -1,0 +1,148 @@
+<div data-ng-controller="ProjectDetailController">
+    <div class="col-xs-12">
+        <uib-alert data-ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">
+            <div class="alert alert-danger" role="alert">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span class="sr-only">Error:</span>
+                {{alert.msg}}
+            </div>
+        </uib-alert>
+    </div>
+    <div class="row">
+        <div class="col-lg-4 col-md-6 col-xs-12">
+            <rd-widget>
+                <rd-widget-body>
+                    <div class="widget-icon green pull-left">
+                        <i class="fa fa-users"></i>
+                    </div>
+                    <div class="title">{{ project.projectName }}</div>
+                    <div class="comment">Project</div>
+                </rd-widget-body>
+            </rd-widget>
+        </div>
+        <div class="col-lg-4 col-md-6 col-xs-12">
+            <rd-widget>
+                <rd-widget-body>
+                    <div class="widget-icon red pull-left">
+                        <i class="fa fa-tasks"></i>
+                    </div>
+                    <div class="title">{{ project.version }}</div>
+                    <div class="comment">Version</div>
+                </rd-widget-body>
+            </rd-widget>
+        </div>
+        <div class="col-lg-4 col-md-6 col-xs-12">
+            <rd-widget>
+                <rd-widget-body>
+                    <div class="widget-icon orange pull-left">
+                        <i class="fa fa-sitemap"></i>
+                    </div>
+                    <div class="title">50%</div>
+                    <div class="comment">Success Rate</div>
+                </rd-widget-body>
+            </rd-widget>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <rd-widget>
+                <rd-widget-header icon="fa-tasks" title="Select from Features">
+                    <td>
+                        <button class="btn btn-large btn-primary pull-right"
+                                ng-click="folderOpen(project.projectLocation)">Open Project
+                        </button>
+                    </td>
+                </rd-widget-header>
+                <rd-widget-body classes="medium no-padding">
+                    <treecontrol class="tree-classic"
+                                 tree-model="features"
+                                 options="treeOptions"
+                                 on-selection="showSelectedFeature(node)">
+                        {{node.name}}
+                    </treecontrol>
+                </rd-widget-body>
+            </rd-widget>
+        </div>
+        <div class="col-lg-6">
+            <form novalidate class="simple-form">
+                <rd-widget>
+                    <rd-widget-header icon="fa-book" title="Select from Profiles">
+                        <!--<input type="text" placeholder="Search" class="form-control input-sm" />-->
+                    </rd-widget-header>
+                    <rd-widget-body classes="medium no-padding">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>Select</th>
+                                    <th>Profile</th>
+                                    <th>BaseURL</th>
+                                    <th>Browser</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="profileData in profiles">
+                                    {{ $index }}
+                                    <td><input ng-model="profileCheckbox.key" type="radio" ng-value="profileData.key"/>
+                                    </td>
+                                    <td>{{ profileData.key }}</td>
+                                    <td>{{
+                                        profileData.profileData.extensions["Behat\\MinkExtension\\Extension"].base_url
+                                        }}</a></td>
+                                    <td>{{
+                                        profileData.profileData.extensions["Behat\\MinkExtension\\Extension"].browser_name
+                                        }}</a></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </rd-widget-body>
+                </rd-widget>
+
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-xs-12">
+            <rd-widget>
+                <rd-widget-header icon="fa-tasks" title="Archived Test Runs"></rd-widget-header>
+                <rd-widget-body>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <button class="btn btn-large btn-danger" ng-disabled="!(selectedNode.path)"
+                                    ng-click="execute(profileCheckbox)">Run
+                                Tests
+                            </button>
+                            <button class="btn btn-large btn-danger pull-right" ng-click="deleteAllTests()">Delete All Tests
+                            </button>
+                            <thead>
+                            <tr>
+                                <th>Outcome</th>
+                                <th>Feature</th>
+                                <th>Profile</th>
+                                <th>Timestamp</th>
+                                <th>Result</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="testRun in testRunArray track by $index ">
+                                {{ testRun }}
+                                <td class="">{{ testRun.outcome }}</td>
+                                <td>{{ testRun.originalFile }}</td>
+                                <td>{{ testRun.profile }}</td>
+                                <td>{{ testRun.key | date:'short' }}</td>
+                                <td>
+                                    <button class="btn btn-large btn-danger" ng-click="openModal(testRun)">View
+                                        Result
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </rd-widget-body>
+            </rd-widget>
+        </div>
+    </div>
+
+</div>

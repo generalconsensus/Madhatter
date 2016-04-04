@@ -1,0 +1,39 @@
+<div class="row">
+    <div class="col-lg-12">
+        <rd-widget>
+            <rd-widget-header icon="fa-tasks" title="Behat Projects">
+            </rd-widget-header>
+            <rd-widget-body classes="x-large no-padding">
+                <div class="table-responsive" data-ng-controller="ProjectListController">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>
+                                Project Name
+                            </th>
+                            <th>
+                                Version
+                            </th>
+                            <th>
+                                Project Location
+                            </th>
+                            <th>
+                                Delete
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="project in projectListing">
+                            {{ project.key }}
+                            <td><a ui-sref="project({ projectID: project.key })">{{project.projectName}}</a></td>
+                            <td>{{project.version}}</td>
+                            <td>{{project.projectLocation}}</td>
+                            <td><button class="btn btn-sm btn-danger" ng-click="delete(project)">Delete</button></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </rd-widget-body>
+        </rd-widget>
+    </div>
+</div>
