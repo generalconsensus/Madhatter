@@ -47,5 +47,8 @@ Icon
 # Bower components
 /src/components
 
+# App Persistence
+/persist
+
 # JetBrains
 .idea
