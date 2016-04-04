@@ -1,5 +1,5 @@
 {
-  "name": "Madhatter 1.0",
+  "name": "Madhatter",
   "description": "Unified Behat Project and Test Management",
   "version": "0.0.1",
   "author": "Daniel McDermott",
@@ -8,7 +8,7 @@
     "start": "electron main.js"
   },
   "devDependencies": {
-    "electron-prebuilt": "^0.33.3",
+    "electron-prebuilt": "^0.36.0",
     "bower": "^1.3.9",
     "gulp": "~3.9.0",
     "gulp-concat": "^2.4.1",

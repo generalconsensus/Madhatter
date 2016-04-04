@@ -1,5 +1,5 @@
 {
-    "name": "Madhatter 1.0",
+    "name": "Madhatter",
     "version": "0.0.1",
     "description": "Unified Behat Project and Test Management",
     "homepage": "https://github.com/generalconsensus/Madhatter",
@@ -22,7 +22,8 @@
         "angular-bootstrap": "~1.0.3",
         "angular-ui-router": "^0.2.15",
         "bootstrap": "~3.3.6",
-        "font-awesome": "~4.5.0"
+        "font-awesome": "~4.5.0",
+        "angular-tree-control": "~0.2.23"
     },
     "repository": {
         "type": "git",
