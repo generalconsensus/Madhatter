@@ -4,9 +4,12 @@
 
 Madhatter is an all-in-one Behat Project Management Tool. Madhatter helps you manage your Behat Installations better by allowing you to list all local Behat projects and test runs, as well as detailed analysis on tests. It is currently a work in progress
 
-![Project Page](/img/demo_1.png "Project Page")
+## Project Listing
 ![Project Listing](/img/demo_2.png "Project Listing")
-![Feature Output](/img/demo_3.png "Feature Output")
+## Project Detail Page
+![Project Detail Page](/img/demo_1.png "Project Detail Page")
+## Feature Test Detail
+![Feature Test Detail](/img/demo_3.png "Feature Test Detail")
 
 ## Usage
 ### Requirements
