@@ -43,14 +43,14 @@ app.controller('ProjectDetailController', ['$scope', '$stateParams', '$uibModal'
             }
         // Grab the the available profiles
         } else if (type == 'profileLookup') {
-            if (data) {
-                for (var key in data) {
-                    $scope.$apply(function () {
-                        $scope.profiles.push({key: key, profileData: data[key]});
-                    });
-                }
+            if (data && data.success) {
+              for (var key in data.data) {
+                  $scope.$apply(function () {
+                      $scope.profiles.push({key: key, profileData: data[key]});
+                  });
+              }
             } else {
-                $scope.addAlert('Behat Profile file is Missing', 'Error');
+              $scope.addAlert('Profile Exception ' + data.data.name + ' error ' + data.data.reason, 'Error');
             }
         // Grab the Behat Test Results
         } else if (type == 'node-exec-reply') {

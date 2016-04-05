@@ -132,8 +132,12 @@ ipcMain.on('asynchronous-message', function (event, type, data) {
                     }
                     if (data) {
                         var yaml = require('js-yaml');
-                        yaml = yaml.safeLoad(data);
-                        event.sender.send('asynchronous-reply', 'profileLookup', yaml);
+                        try {
+                          var yamlData = yaml.safeLoad(data);
+                        } catch (e) {
+                          event.sender.send('asynchronous-reply', 'profileLookup', {success: false, data: e});
+                        }
+                        event.sender.send('asynchronous-reply', 'profileLookup', {success: true, data: yamlData});
                     }
                 });
             }
@@ -262,12 +266,12 @@ var appIcon = null;
 var trayBounds = null;
 
 function createWindow() {
-    
+
     appIcon = new Tray(__dirname + '/mad-hatter-hat-hi.png');
 
     //   appIcon = new Tray('./icon_48x48.png');
     appIcon.setToolTip('Netflix Remote');
-    
+
     // Create the browser window.
     mainWindow = new BrowserWindow({
         width: 1024,
@@ -276,7 +280,7 @@ function createWindow() {
     });
 
     // Open the DevTools.
-    //mainWindow.webContents.openDevTools();
+    mainWindow.webContents.openDevTools();
 
     // and load the index.html of the app.
     mainWindow.loadURL('file://' + __dirname + '/dist/index.html');
