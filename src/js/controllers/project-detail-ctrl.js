@@ -1,6 +1,7 @@
-app.controller('ProjectDetailController', ['$scope', '$stateParams', '$uibModal', '$log', function ($scope, $stateParams, $uibModal, $log) {
+app.controller('ProjectDetailController', ['$rootScope', '$scope', '$stateParams', '$uibModal', '$state', '$log', function ($rootScope, $scope, $stateParams, $uibModal, $state, $log) {
     const ipcRenderer = require('electron').ipcRenderer;
     const shell = require('electron').shell;
+
 
     // get the id
     $scope.id = $stateParams.projectID;
@@ -161,5 +162,44 @@ app.controller('ProjectDetailController', ['$scope', '$stateParams', '$uibModal'
         $scope.testRunArray = [];
     };
 
+        $scope.data = {
+        text: "hello"
+        }
 
-}]);
+    $scope.disabled = false;
+    $scope.menu = [
+        ['bold', 'italic', 'underline', 'strikethrough', 'subscript', 'superscript'],
+        ['format-block'],
+        ['font'],
+        ['font-size'],
+        ['font-color', 'hilite-color'],
+        ['remove-format'],
+        ['ordered-list', 'unordered-list', 'outdent', 'indent'],
+        ['left-justify', 'center-justify', 'right-justify'],
+        ['code', 'quote', 'paragraph'],
+        ['link', 'image'],
+        ['css-class']
+    ];
+
+    $scope.cssClasses = ['test1', 'test2'];
+
+    $scope.setDisabled = function() {
+        $scope.disabled = !$scope.disabled;
+    }
+
+     $scope.lastClicked = null;
+     $scope.buttonClick = function($event, node) {
+         $scope.lastClicked = node;
+         $event.stopPropagation();
+
+         console.log(node);
+         if (node.name) {
+            $rootScope.navList.push({
+                'title': node.name,
+                'url': 'fileEditor'
+            });    
+            $state.go('fileEditor', { fileNode: node, project: $scope.project});
+         } 
+     }
+
+    }]);

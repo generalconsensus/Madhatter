@@ -25,10 +25,7 @@ var paths = {
  */
 gulp.task('usemin', function() {
     return gulp.src(paths.index)
-        .pipe(usemin({
-            js: [minifyJs(), 'concat'],
-            //css: [minifyCss({keepSpecialComments: 0}), 'concat'],
-        }))
+        .pipe(usemin())
         .pipe(gulp.dest('dist/'));
 });
 

@@ -2,9 +2,9 @@
  * Master Controller
  */
 
-app.controller('MasterCtrl', ['$scope', '$cookieStore', '$uibModal', '$log', MasterCtrl]);
+app.controller('MasterCtrl', ['$rootScope', '$scope', '$cookieStore', '$uibModal', '$log', MasterCtrl]);
 
-function MasterCtrl($scope, $cookieStore, $uibModal, $log) {
+function MasterCtrl($rootScope, $scope, $cookieStore, $uibModal, $log) {
     /**
      * Sidebar Toggle & Cookie Control
      */
@@ -53,4 +53,11 @@ function MasterCtrl($scope, $cookieStore, $uibModal, $log) {
     $scope.toggleAnimation = function () {
         $scope.animationsEnabled = !$scope.animationsEnabled;
     };
+
+    $rootScope.navList = [
+    {
+        'title': 'Projects',
+        'url': 'projects'
+    }
+    ];
 }

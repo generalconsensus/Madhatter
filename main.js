@@ -10,9 +10,12 @@ const crypto = require('crypto');
 const tty = require('tty.js');
 const tmp = require('tmp');
 const xml2js = require('xml2js');
+const Gherkin = require('gherkin');
 
 const testPersist = storage.create({dir: __dirname + '/persist/tests', ttl: false});
 const projectPersist = storage.create({dir: __dirname + '/persist/projects', ttl: false});
+
+const dialog = require('electron').dialog;
 
 // Enable persistence
 testPersist.init();
@@ -98,8 +101,7 @@ ipcMain.on('asynchronous-message', function (event, type, data) {
                 });
             }
 
-        }
-        else if (type == 'behat-search') {
+        } else if (type == 'behat-search') {
             //This sets up the file finder
             var finder = require('findit')(data);
             //This listens for files found
@@ -124,6 +126,23 @@ ipcMain.on('asynchronous-message', function (event, type, data) {
             finder.on('end', function () {
                 event.sender.send('asynchronous-reply', 'stopped_scanning');
             });
+        }  else if (type == 'fileEdit') {
+            if (data) {
+            fs.readFile(data, 'utf8', function (err, data) {
+                    if (err) {
+                        event.sender.send('asynchronous-reply', 'fileEdit', null);
+                    }
+                    if (data) {
+                        var parser = new Gherkin.Parser();
+                        try {
+                        var gherkinDocument = parser.parse(data);
+                        } catch (e) {
+                          event.sender.send('asynchronous-reply', 'fileEdit', {success: false, data: e});
+                        }
+                        event.sender.send('asynchronous-reply', 'fileEdit', {success: true, dataRaw: data, dataComposed: gherkinDocument});
+                    }
+                });            
+            }
         } else if (type == 'profileLookup') {
             if (data) {
                 fs.readFile(data, 'utf8', function (err, data) {
@@ -292,6 +311,8 @@ function createWindow() {
         // when you should delete the corresponding element.
         mainWindow = null;
     });
+
+    // console.log(dialog.showOpenDialog({ properties: [ 'openFile', 'openDirectory', 'multiSelections' ]}));
 }
 
 // This method will be called when Electron has finished
@@ -315,3 +336,5 @@ app.on('activate', function () {
     }
 
 });
+
+

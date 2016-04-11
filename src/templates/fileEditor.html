@@ -1,0 +1,24 @@
+<div data-ng-controller="FileEditorController">
+    <div class="col-xs-12">
+        <uib-alert data-ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">
+            <div class="alert alert-danger" role="alert">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span class="sr-only">Error:</span>
+                {{alert.msg}}
+            </div>
+        </uib-alert>
+    </div>
+    <div ng-disabled="!(selectedNode.path)">
+        <wysiwyg textarea-id="question" 
+          textarea-class="form-control"  
+          textarea-height="auto" 
+          textarea-name="textareaQuestion"
+          textarea-required 
+          ng-model="fileData"
+          enable-bootstrap-title="true"
+          textarea-menu="menu"
+          disabled="disabled">
+        </wysiwyg>
+      <button ng-click="save()">Save</button>
+    </div>
+</div>

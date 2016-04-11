@@ -1,32 +1,33 @@
 {
-    "name": "Madhatter",
-    "version": "0.0.1",
-    "description": "Unified Behat Project and Test Management",
-    "homepage": "https://github.com/generalconsensus/Madhatter",
-    "authors": [
-        "Daniel McDermott <danielmichaelmcdermott@gmail.com>"
-    ],
-    "main": "index.html",
-    "license": "MIT",
-    "ignore": [
-        "**/.*",
-        "node_modules",
-        "bower_components",
-        "test",
-        "tests"
-    ],
-    "dependencies": {
-        "rdash-ui": "1.0.*",
-        "angular": "~1.5.0",
-        "angular-cookies": "~1.5.0",
-        "angular-bootstrap": "~1.0.3",
-        "angular-ui-router": "^0.2.15",
-        "bootstrap": "~3.3.6",
-        "font-awesome": "~4.5.0",
-        "angular-tree-control": "~0.2.23"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/generalconsensus/Madhatter"
-    }
+  "name": "Madhatter",
+  "version": "0.0.1",
+  "description": "Unified Behat Project and Test Management",
+  "homepage": "https://github.com/generalconsensus/Madhatter",
+  "authors": [
+    "Daniel McDermott <danielmichaelmcdermott@gmail.com>"
+  ],
+  "main": "index.html",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "rdash-ui": "1.0.*",
+    "angular": "~1.5.0",
+    "angular-cookies": "~1.5.0",
+    "angular-bootstrap": "~1.0.3",
+    "angular-ui-router": "^0.2.15",
+    "bootstrap": "~3.3.6",
+    "font-awesome": "~4.5.0",
+    "angular-tree-control": "~0.2.23",
+    "angular-wysiywg": "https://github.com/wadeos/angular-wysiwyg"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/generalconsensus/Madhatter"
+  }
 }

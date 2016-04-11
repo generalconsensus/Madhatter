@@ -23,6 +23,12 @@ app.config(['$stateProvider', '$urlRouterProvider',
                 url: '/projectSetup',
                 templateUrl: 'templates/projectSetup.html',
                 animation: true
+            })
+            .state('fileEditor', {
+                url: '/fileEditor',
+                templateUrl: 'templates/fileEditor.html',
+                params: { fileNode: null, project: null },
+                animation: true
             });
 
     }
