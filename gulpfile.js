@@ -59,6 +59,8 @@ gulp.task('custom-js', function() {
         .pipe(gulp.dest('dist/js'));
 });
 
+
+
 gulp.task('custom-less', function() {
     return gulp.src(paths.styles)
         .pipe(less())
@@ -91,16 +93,22 @@ gulp.task('watch', function() {
     gulp.watch([paths.index], ['usemin']);
 });
 
-/**
- * Live reload server
- */
-// gulp.task('webserver', function() {
-//     connect.server({
-//         root: 'dist',
-//         livereload: true,
-//         port: 8888
-//     });
-// });
+gulp.task('ace', function() {
+  return gulp.src([
+    'src/components/angular-ui-ace/ui-ace.js',
+    'src/components/ace-builds/src-noconflict/ace.js',
+    'src/components/ace-builds/src-noconflict/ext-language_tools.js',
+    'src/components/ace-builds/src-noconflict/mode-javascript.js',
+    'src/components/ace-builds/src-noconflict/mode-scheme.js',
+    'src/components/ace-builds/src-noconflict/mode-markdown.js',
+    'src/components/ace-builds/src-noconflict/theme-chrome.js',
+    'src/components/ace-builds/src-noconflict/snippets/text.js',
+    'src/components/ace-builds/src-noconflict/snippets/javascript.js',
+    'src/components/ace-builds/src/theme-twilight.js'
+    ])
+    .pipe(concat('ace.js'))
+    .pipe(gulp.dest('dist/js'));
+});
 
 gulp.task('livereload', function() {
     gulp.src(['dist/**/*.*'])
@@ -111,5 +119,5 @@ gulp.task('livereload', function() {
 /**
  * Gulp tasks
  */
-gulp.task('build', ['usemin', 'build-assets', 'build-custom']);
-gulp.task('default', ['build', 'livereload', 'watch']);
+gulp.task('build', ['usemin', 'build-assets', 'build-custom', 'ace']);
+gulp.task('default', ['build', 'watch']);

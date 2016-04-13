@@ -8,17 +8,7 @@
             </div>
         </uib-alert>
     </div>
-    <div ng-disabled="!(selectedNode.path)">
-        <wysiwyg textarea-id="question" 
-          textarea-class="form-control"  
-          textarea-height="auto" 
-          textarea-name="textareaQuestion"
-          textarea-required 
-          ng-model="fileData"
-          enable-bootstrap-title="true"
-          textarea-menu="menu"
-          disabled="disabled">
-        </wysiwyg>
-      <button ng-click="save()">Save</button>
-    </div>
+ 
+  <div ui-ace="aceOption" ng-model="fileData"></div>
+    <button class="btn btn-large btn-danger" ng-click="save(file)">Save</button>
 </div>

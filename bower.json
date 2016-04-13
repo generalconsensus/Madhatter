@@ -24,7 +24,8 @@
     "bootstrap": "~3.3.6",
     "font-awesome": "~4.5.0",
     "angular-tree-control": "~0.2.23",
-    "angular-wysiywg": "https://github.com/wadeos/angular-wysiwyg"
+    "angular-wysiywg": "https://github.com/wadeos/angular-wysiwyg",
+    "ace-build": "1.2.3"
   },
   "repository": {
     "type": "git",
