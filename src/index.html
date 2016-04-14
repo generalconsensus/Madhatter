@@ -43,8 +43,10 @@
         </li>
         <li class="sidebar-title"><span>NAVIGATION</span></li>
         <li class="sidebar-list" ng-repeat="list in navList track by list.title">
-          <a href="#/{{ list.url }}">{{ list.title }}  <span class="menu-icon fa fa-table"></span></a>
-        </li>
+          <a ui-sref-active="active" ui-sref-active-eq="activeeq" ui-state="project" ui-state-params="{{ list.params }}"><span class="menu-icon fa fa-table"></span>{{ list.title }}</a>
+          <!-- <a ui-state="{{ list.state }}" ui-state-params="{{ list.params }}">{{ list.title }}<span class="menu-icon fa fa-table"></span><</a> -->
+<!--           <a href="#/{{ list.url }}">{{ list.title }}  <span class="menu-icon fa fa-table"></span></a>
+ -->        </li>
       </ul>
       <div class="sidebar-footer">
         <div class="col-xs-4">

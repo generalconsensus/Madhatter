@@ -1,5 +1,16 @@
-app.controller('ProjectListController', ['$scope', function ($scope) {
+app.controller('ProjectListController', ['$scope', '$rootScope', function ($scope, $rootScope) {
     $scope.projectListing = [];
+
+    $scope.buildMenuItem = function(project) {
+         console.log(project);
+         if (project) {
+            $rootScope.navList.push({
+                'title': project.projectName,
+                'state': 'project',
+                'params': project
+            });    
+         } 
+    }
 
     ipcRenderer.send('asynchronous-message', 'node-persist-project-listing-lookup');
 

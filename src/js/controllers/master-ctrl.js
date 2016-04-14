@@ -57,7 +57,8 @@ function MasterCtrl($rootScope, $scope, $cookieStore, $uibModal, $log) {
     $rootScope.navList = [
     {
         'title': 'Projects',
-        'url': 'projects'
+        'state': 'index',
+        'params': ''
     }
     ];
 }

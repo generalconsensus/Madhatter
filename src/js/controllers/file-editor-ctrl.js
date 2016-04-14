@@ -47,7 +47,7 @@ app.controller('FileEditorController', ['$scope', '$stateParams', function ($sco
   };
 
   $scope.save = function () {
-
+  	console.log('test');
   };
  
 

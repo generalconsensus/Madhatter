@@ -194,11 +194,13 @@ app.controller('ProjectDetailController', ['$rootScope', '$scope', '$stateParams
 
          console.log(node);
          if (node.name) {
+            var params = { fileNode: node, project: $scope.project};
             $rootScope.navList.push({
                 'title': node.name,
-                'url': 'fileEditor'
+                'state': 'fileEditor',
+                'params': params
             });    
-            $state.go('fileEditor', { fileNode: node, project: $scope.project});
+            $state.go('fileEditor', params);
          } 
      }
 
