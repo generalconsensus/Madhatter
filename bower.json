@@ -24,7 +24,8 @@
     "bootstrap": "~3.3.6",
     "font-awesome": "~4.5.0",
     "angular-tree-control": "~0.2.23",
-    "angular-wysiywg": "https://github.com/wadeos/angular-wysiwyg",
+    "angular-bootstrap-colorpicker": "3.0.25",
+    "angular-ui-ace": "0.2.3",
     "ace-build": "1.2.3"
   },
   "repository": {

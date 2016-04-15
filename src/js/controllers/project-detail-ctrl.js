@@ -2,7 +2,6 @@ app.controller('ProjectDetailController', ['$rootScope', '$scope', '$stateParams
     const ipcRenderer = require('electron').ipcRenderer;
     const shell = require('electron').shell;
 
-
     // get the id
     $scope.id = $stateParams.projectID;
     $scope.features = [];
@@ -33,7 +32,7 @@ app.controller('ProjectDetailController', ['$rootScope', '$scope', '$stateParams
             if ($scope.project.profileLocation) {
                 ipcRenderer.send('asynchronous-message', 'profileLookup', $scope.project.profileLocation);
             }
-        // Grab the directory tree listing for the feature folder
+            // Grab the directory tree listing for the feature folder
         } else if (type == 'featureListing') {
             if (data) {
                 $scope.$apply(function () {
@@ -42,31 +41,33 @@ app.controller('ProjectDetailController', ['$rootScope', '$scope', '$stateParams
             } else {
                 $scope.addAlert('Features Folder is Missing', 'Error');
             }
-        // Grab the the available profiles
+            // Grab the the available profiles
         } else if (type == 'profileLookup') {
             if (data && data.success) {
-              for (var key in data.data) {
-                  $scope.$apply(function () {
-                      $scope.profiles.push({key: key, profileData: data[key]});
-                  });
-              }
+                var profiles = [];
+                for (var key in data.data) {
+                    profiles.push({key: key, profileData: data[key]});
+                }
+                $scope.$apply(function () {
+                    $scope.profiles = profiles;
+                });
             } else {
-              $scope.addAlert('Profile Exception ' + data.data.name + ' error ' + data.data.reason, 'Error');
+                $scope.addAlert('Profile Exception ' + data.data.name + ' error ' + data.data.reason, 'Error');
             }
-        // Grab the Behat Test Results
+            // Grab the Behat Test Results
         } else if (type == 'node-exec-reply') {
             ipcRenderer.send('asynchronous-message', 'node-persist-project-test-lookup', {id: $scope.id});
-        // Grab the Project Tests
+            // Grab the Project Tests
         } else if (type == 'node-persist-project-test-lookup') {
             $scope.$apply(function () {
                 $scope.testRunArray = data;
             });
-        // Grab the Project Saves
+            // Grab the Project Saves
         } else if (type == 'node-persist-project-test-save') {
             $scope.$apply(function () {
                 $scope.testRunArray = data;
             });
-        // Grab the Project Delete
+            // Grab the Project Delete
         } else if (type == 'node-persist-project-test-delete') {
             $scope.$apply(function () {
                 $scope.testRunArray = data;
@@ -162,9 +163,9 @@ app.controller('ProjectDetailController', ['$rootScope', '$scope', '$stateParams
         $scope.testRunArray = [];
     };
 
-        $scope.data = {
-        text: "hello"
-        }
+    //$scope.data = {
+    //text: "hello"
+    //};
 
     $scope.disabled = false;
     $scope.menu = [
@@ -183,25 +184,31 @@ app.controller('ProjectDetailController', ['$rootScope', '$scope', '$stateParams
 
     $scope.cssClasses = ['test1', 'test2'];
 
-    $scope.setDisabled = function() {
+    $scope.setDisabled = function () {
         $scope.disabled = !$scope.disabled;
-    }
+    };
 
-     $scope.lastClicked = null;
-     $scope.buttonClick = function($event, node) {
-         $scope.lastClicked = node;
-         $event.stopPropagation();
+    $scope.lastClicked = null;
+    $scope.buttonClick = function ($event, node) {
+        $scope.lastClicked = node;
+        $event.stopPropagation();
 
-         console.log(node);
-         if (node.name) {
-            var params = { fileNode: node, project: $scope.project};
+        if (node.name) {
+            var params = {fileNode: node, project: $scope.project};
+            $state.go('fileEditor', params);
+
+            for (var key in $rootScope.navList) {
+                if ($rootScope.navList[key].title == node.name) {
+                    return;
+                }
+            }
             $rootScope.navList.push({
                 'title': node.name,
                 'state': 'fileEditor',
-                'params': params
-            });    
-            $state.go('fileEditor', params);
-         } 
-     }
+                'params': params,
+                'delete': true
+            });
+        }
+    }
 
-    }]);
+}]);

@@ -104,17 +104,21 @@ gulp.task('ace', function() {
     'src/components/ace-builds/src-noconflict/theme-chrome.js',
     'src/components/ace-builds/src-noconflict/snippets/text.js',
     'src/components/ace-builds/src-noconflict/snippets/javascript.js',
-    'src/components/ace-builds/src/theme-twilight.js'
+    'src/components/ace-builds/src-noconflict/mode-gherkin.js',
+    'src/components/ace-builds/src-noconflict/snippets/gherkin.js',
+    'src/components/ace-builds/src-noconflict/mode-yaml.js',
+    'src/components/ace-builds/src-noconflict/snippets/yaml.js',
+    'src/components/ace-builds/src-noconflict/ext-language_tools.js'
     ])
     .pipe(concat('ace.js'))
     .pipe(gulp.dest('dist/js'));
 });
 
-gulp.task('livereload', function() {
-    gulp.src(['dist/**/*.*'])
-        .pipe(watch(['dist/**/*.*']))
-        .pipe(connect.reload());
-});
+//gulp.task('livereload', function() {
+//    gulp.src(['dist/**/*.*'])
+//        .pipe(watch(['dist/**/*.*']))
+//        .pipe(connect.reload());
+//});
 
 /**
  * Gulp tasks

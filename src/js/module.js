@@ -1,4 +1,4 @@
-var app = angular.module('MadHatter', ['ui.bootstrap', 'ui.router', 'ngCookies', 'treeControl', 'colorpicker.module', 'ui.ace', 'wysiwyg.module']);
+var app = angular.module('MadHatter', ['ui.bootstrap', 'ui.router', 'ngCookies', 'treeControl', 'colorpicker.module', 'ui.ace']);
 
 app.directive('folderModel', ['$parse', function ($parse) {
     return {

@@ -2,22 +2,22 @@
  * Master Controller
  */
 
-app.controller('MasterCtrl', ['$rootScope', '$scope', '$cookieStore', '$uibModal', '$log', MasterCtrl]);
+app.controller('MasterCtrl', ['$rootScope', '$scope', '$cookieStore', '$uibModal', '$state', '$log', MasterCtrl]);
 
-function MasterCtrl($rootScope, $scope, $cookieStore, $uibModal, $log) {
+function MasterCtrl($rootScope, $scope, $cookieStore, $uibModal, $state, $log) {
     /**
      * Sidebar Toggle & Cookie Control
      */
     var mobileView = 992;
 
-    $scope.getWidth = function() {
+    $scope.getWidth = function () {
         return window.innerWidth;
     };
 
-    $scope.$watch($scope.getWidth, function(newValue, oldValue) {
+    $scope.$watch($scope.getWidth, function (newValue, oldValue) {
         if (newValue >= mobileView) {
             if (angular.isDefined($cookieStore.get('toggle'))) {
-                $scope.toggle = ! $cookieStore.get('toggle') ? false : true;
+                $scope.toggle = !$cookieStore.get('toggle') ? false : true;
             } else {
                 $scope.toggle = true;
             }
@@ -27,12 +27,12 @@ function MasterCtrl($rootScope, $scope, $cookieStore, $uibModal, $log) {
 
     });
 
-    $scope.toggleSidebar = function() {
+    $scope.toggleSidebar = function () {
         $scope.toggle = !$scope.toggle;
         $cookieStore.put('toggle', $scope.toggle);
     };
 
-    window.onresize = function() {
+    window.onresize = function () {
         $scope.$apply();
     };
 
@@ -55,10 +55,28 @@ function MasterCtrl($rootScope, $scope, $cookieStore, $uibModal, $log) {
     };
 
     $rootScope.navList = [
-    {
-        'title': 'Projects',
-        'state': 'index',
-        'params': ''
-    }
+        {
+            'title': 'Projects',
+            'state': 'index',
+            'params': '',
+            'delete': false
+        }
     ];
+
+    $scope.deleteMenuItem = function (title) {
+
+        if (title != 'Projects') {
+            for (var i = 0; i < $rootScope.navList.length; i++) {
+                if ($rootScope.navList[i].title == title) {
+                    $rootScope.navList.splice(i, 1);
+                    break;
+                }
+            }
+            //// Send us back to the Index if there are no other tabs
+            //if ($rootScope.navList.length == 1) {
+            //    //TODO: This doesn't work for some reason
+            //    $state.go('index');
+            //}
+        }
+    }
 }

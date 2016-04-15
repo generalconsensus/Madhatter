@@ -59,7 +59,7 @@
                                  options="treeOptions"
                                  on-selection="showSelectedFeature(node)">
                         {{node.name}}
-                        <button class="btn btn-large btn-primary" ng-click="buttonClick($event, node)">Edit</button>
+                        <button ng-show="node && (node.name.includes('.php') || node.name.includes('.feature'))" class="btn btn-sm btn-primary" ng-click="buttonClick($event, node)">Edit</button>
                     </treecontrol>
                 </rd-widget-body>
             </rd-widget>

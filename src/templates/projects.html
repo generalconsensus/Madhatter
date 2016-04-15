@@ -25,8 +25,7 @@
                         <tbody>
                         <tr ng-repeat="project in projectListing">
                             {{ project.key }}
-                            <!-- <td><a ui-state="project" ui-state-params="project({ projectID: project.key })" ng-click="buildMenuItem(project)">{{project.projectName}}</a></td> -->
-                            <td><a ui-sref="project({ projectID: project.key })">{{project.projectName}}</a></td>
+                            <td><a ui-state="'project'" ui-state-params="{ projectID: project.key }"  ng-click="buildMenuItem(project, project.key)">{{project.projectName}}</a></td>
                             <td>{{project.version}}</td>
                             <td>{{project.projectLocation}}</td>
                             <td><button class="btn btn-sm btn-danger" ng-click="delete(project)">Delete</button></td>
