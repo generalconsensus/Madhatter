@@ -239,6 +239,17 @@ ipcMain.on('asynchronous-message', function (event, type, data) {
                     }
                 });
             }
+        } else if (type == 'saveFile') {
+            if (data && data.file && data.fileData) {
+                fs.writeFile(data.file, data.fileData, 'utf8', function (err) {
+                    if (err) {
+                        event.sender.send('asynchronous-reply', 'saveFile', null);
+                    }
+                    else {
+                        event.sender.send('asynchronous-reply', 'saveFile', true);
+                    }
+                })
+            }
         }
     }
 );

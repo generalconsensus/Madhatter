@@ -1,13 +1,11 @@
 <div data-ng-controller="FileEditorController">
     <div class="col-xs-12">
         <uib-alert data-ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">
-            <div class="alert alert-danger" role="alert">
                 <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                <span class="sr-only">Error:</span>
                 {{alert.msg}}
-            </div>
         </uib-alert>
+    
         <div ui-ace="aceOption" ng-model="fileData"></div>
-        <button class="btn btn-large btn-danger" ng-click="save(file)">Save</button>
+        <button class="btn btn-large btn-danger" ng-click="save()">Save</button>
     </div>
 </div>
