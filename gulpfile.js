@@ -106,6 +106,8 @@ gulp.task('ace', function() {
     'src/components/ace-builds/src-noconflict/snippets/javascript.js',
     'src/components/ace-builds/src-noconflict/mode-gherkin.js',
     'src/components/ace-builds/src-noconflict/snippets/gherkin.js',
+    'src/components/ace-builds/src-noconflict/mode-php.js',
+    'src/components/ace-builds/src-noconflict/snippets/php.js',
     'src/components/ace-builds/src-noconflict/mode-yaml.js',
     'src/components/ace-builds/src-noconflict/snippets/yaml.js',
     'src/components/ace-builds/src-noconflict/ext-language_tools.js'

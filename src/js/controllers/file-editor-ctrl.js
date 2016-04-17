@@ -41,9 +41,15 @@ app.controller('FileEditorController', ['$scope', '$stateParams', function ($sco
     });
 
 
+    var mode = 'gherkin';
+
+    if ($scope.file.name.indexOf(".php") > -1) {
+        mode = 'php';
+    }
+
     // The ui-ace option
     $scope.aceOption = {
-        mode: 'gherkin',
+        mode: mode,
         onLoad: function (_ace) {
 
             // HACK to have the ace instance in the scope...
