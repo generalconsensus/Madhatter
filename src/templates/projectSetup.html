@@ -1,47 +1,71 @@
- <div class="modal-content">
-        <div class="modal-header">
-            <div class="bootstrap-dialog-header">
-                <div class="bootstrap-dialog-close-button" style="display: none;">
-                    <button class="close">×</button>
-                </div>
-                <h1><div class="bootstrap-dialog-title" id="e6ed6690-b5ad-4a6c-b8d8-de0fcc92af8b_title">Project Setup</div></h1>
+<div class="modal-content">
+    <div class="modal-header">
+        <div class="bootstrap-dialog-header">
+            <div class="bootstrap-dialog-close-button" style="display: none;">
+                <button class="close">×</button>
             </div>
+            <h1>
+                <div class="bootstrap-dialog-title" id="e6ed6690-b5ad-4a6c-b8d8-de0fcc92af8b_title">Project Setup</div>
+            </h1>
         </div>
-        <div class="modal-body">
-            <div class="bootstrap-dialog-body">
-                <div ng-controller="FileController">
-                    <h5>Select a folder to scan for Behat Projects</h5>
-                    <div>
+    </div>
+    <div class="modal-body">
+        <div class="bootstrap-dialog-body">
+            <div ng-controller="FileController">
+                <h5>Select a folder to scan for Behat Projects</h5>
+                <div>
                 <span class="file-input btn btn-block btn-primary btn-file">
                 Select Folder&hellip; <input type="file" folder-model="behatFolder" webkitdirectory directory multiple/>
                 </span>
-                    </div>
-                    <button class="btn btn-primary btn-scan" type="button" ng-click="scan()">Scan</button>
-                    <!--<strong><h3 ng-bind="scanTarget"></h3></strong>-->
-                    <div ng-show="scanTarget" class="animate-show" ng-controller="formSubmitController">
-                        <form novalidate class="simple-form">
-                            <div ng-repeat="behatTarget in behatTargets | filter:q as results">
-                                <h3 ng-bind="behatTarget.msg"></h3>
-                                <div ng-show="behatTarget.projectName">Project Name</div>
-                                <input class="behat-setup" class="behat-setup"type="text" ng-model="behatTarget.projectName" name="Project Name:"/><br/>
-                                <div ng-show="behatTarget.featuresLocation">Features Folder:</div>
-                                <input class="behat-setup" type="text" ng-model="behatTarget.featuresLocation" name="Features Folder:"/><br/>
-                                <div ng-show="behatTarget.profileLocation">Behat Profile File:</div>
-                                <input class="behat-setup" type="text" ng-model="behatTarget.profileLocation" name="Behat Profile File:"/><br/>
-                                <div ng-show="behatTarget.projectLocation">Location</div>
-                                <input class="behat-setup" type="text" ng-model="behatTarget.projectLocation" disabled name="Location:"/><br/>
-                                <input type="submit" ng-click="submit(behatTarget)" value="Save"/>
-                            </div>
-                        </form>
-                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="modal-footer" style="display: block;">
-            <div class="bootstrap-dialog-footer">
-                <div class="bootstrap-dialog-footer-buttons">
-                    <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
-                </div>
-            </div>
+                <button class="btn btn-primary btn-scan" type="button" ng-click="scan()">Scan</button>
+            </br>
+            <rd-widget ng-show="scanTarget" class="animate-show"
+                       ng-controller="formSubmitController">
+                <rd-widget-header icon="fa-tasks" title="Projects"></rd-widget-header>
+                <rd-widget-body>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Project Name</th>
+                                <th>Features Folder</th>
+                                <th>Profile File</th>
+                                <th>Location</th>
+                                <th>Save</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="behatTarget in behatTargets | filter:q as results">
+                                <td><input class="behat-setup" class="behat-setup" type="text"
+                                           ng-model="behatTarget.projectName" name="Project Name:"/></td>
+                                <td><input class="behat-setup" type="text" ng-model="behatTarget.featuresLocation"
+                                           name="Features Folder:"/></td>
+                                <td><input class="behat-setup" type="text" ng-model="behatTarget.profileLocation"
+                                           name="Behat Profile File:"/></td>
+                                <td><input class="behat-setup" type="text" ng-model="behatTarget.projectLocation"
+                                           disabled
+                                           name="Location:"/></td>
+                                <td>
+                                    <button class="btn btn-large btn-danger" ng-click="submit(behatTarget)">Save
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <!--<button class="btn btn-large btn-danger" ng-click="submitAll(behatTargets)">Save All-->
+                        <!--</button>-->
+                    </div>
+                </rd-widget-body>
+            </rd-widget>
         </div>
     </div>
+</div>
+<div class="modal-footer" style="display: block;">
+    <div class="bootstrap-dialog-footer">
+        <div class="bootstrap-dialog-footer-buttons">
+            <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+        </div>
+    </div>
+</div>
+</div>

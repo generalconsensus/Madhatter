@@ -1,11 +1,40 @@
 <div data-ng-controller="FileEditorController">
-    <div class="col-xs-12">
-        <uib-alert data-ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">
-                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                {{alert.msg}}
-        </uib-alert>
-    
-        <div ui-ace="aceOption" ng-model="fileData"></div>
-        <button class="btn btn-large btn-danger" ng-click="save()">Save</button>
+    <div class="row">
+        <div class="col-lg-6">
+            <rd-widget>
+                <rd-widget-header icon="fa-tasks" title="Editor">
+                </rd-widget-header>
+                <rd-widget-body classes="x-large no-padding">
+                    <div ui-ace="aceOption" ng-model="fileData"></div>
+                    <button class="btn btn-large btn-danger" ng-click="save()">Save</button>
+                </rd-widget-body>
+            </rd-widget>
+        </div>
+        <div class="col-lg-6">
+            <rd-widget>
+                <rd-widget-header icon="fa-users" title="Definition List">
+                </rd-widget-header>
+                <rd-widget-body classes="x-large no-padding">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Definition</th>
+                                <th>Add</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="definition in definitionListing track by $index ">
+                                <td class="">{{ definition }}</td>
+                                <td>  <button class="btn btn-large btn-danger" ng-click="insertDefintion(definition)">Insert
+                                </button> </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </rd-widget-body>
+                <rd-widget>
+        </div>
     </div>
 </div>
+

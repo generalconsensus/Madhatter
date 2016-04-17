@@ -2,9 +2,11 @@ app.controller('FileEditorController', ['$scope', '$stateParams', function ($sco
     $scope.project = $stateParams.project;
     $scope.file = $stateParams.fileNode;
     $scope.fileData = '';
+    $scope.definitionListing = [];
     $scope.disabled = false;
     $scope.menu = [];
     $scope.alerts = [];
+    $scope.editor = {};
 
     $scope.setDisabled = function () {
         $scope.disabled = !$scope.disabled;
@@ -23,6 +25,7 @@ app.controller('FileEditorController', ['$scope', '$stateParams', function ($sco
 
     if ($scope.project.featuresLocation && $scope.file.path) {
         ipcRenderer.send('asynchronous-message', 'fileEdit', $scope.project.featuresLocation + '/' + $scope.file.path);
+        ipcRenderer.send('asynchronous-message', 'definitionList', $scope.project);
     }
 
     ipcRenderer.on('asynchronous-reply', function (event, type, data) {
@@ -36,6 +39,12 @@ app.controller('FileEditorController', ['$scope', '$stateParams', function ($sco
                 $scope.addAlert('File Saved', 'success');
             } else {
                 $scope.addAlert('Error Saving File', 'danger');
+            }
+        } else if (type == 'definitionList') {
+            if (data) {
+                $scope.$apply(function () {
+                    $scope.definitionListing = data;
+                });
             }
         }
     });
@@ -56,7 +65,7 @@ app.controller('FileEditorController', ['$scope', '$stateParams', function ($sco
             $scope.modeChanged = function () {
                 _ace.getSession().setMode("ace/mode/" + $scope.mode.toLowerCase());
             };
-
+            $scope.editor = _ace;
         },
         advanced: {
             enableSnippets: true,
@@ -70,6 +79,9 @@ app.controller('FileEditorController', ['$scope', '$stateParams', function ($sco
         ipcRenderer.send('asynchronous-message', 'saveFile', {file: file_path, fileData: $scope.fileData});
     };
 
+    $scope.insertDefintion = function (definition) {
+        $scope.editor.insert(definition);
+    };
 
 
 }]);

@@ -15,8 +15,6 @@ const Gherkin = require('gherkin');
 const testPersist = storage.create({dir: __dirname + '/persist/tests', ttl: false});
 const projectPersist = storage.create({dir: __dirname + '/persist/projects', ttl: false});
 
-const dialog = require('electron').dialog;
-
 // Enable persistence
 testPersist.init();
 projectPersist.init();
@@ -24,7 +22,7 @@ projectPersist.init();
 ipcMain.on('asynchronous-message', function (event, type, data) {
         if (type == 'node-exec') {
             if (data) {
-                var execFile = require('child_process').execFile;
+                var testExecFile = require('child_process').execFile;
 
                 tmp.dir(function _tempDirCreated(err, tmpFolder, cleanupCallback) {
                     if (err) throw err;
@@ -44,7 +42,7 @@ ipcMain.on('asynchronous-message', function (event, type, data) {
                         };
 
 
-                    execFile('bin/behat', [behatProfile, configOpt, junit, junitFolder, data.features], options, function (error, stdout, stderr) {
+                    testExecFile('bin/behat', [behatProfile, configOpt, junit, junitFolder, data.features], options, function (error, stdout, stderr) {
                         var finder = require('findit')(tmpFolder);
 
                         //This listens for files found
@@ -250,6 +248,36 @@ ipcMain.on('asynchronous-message', function (event, type, data) {
                     }
                 })
             }
+        } else if (type == 'definitionList') {
+            if (data) {
+                console.log(data);
+                var defExecFile = require('child_process').execFile;
+
+                    var configOpt = '-dl',
+                        options = {
+                            cwd: data.projectLocation
+                        };
+
+
+                    defExecFile('bin/behat', [configOpt], options, function (error, stdout, stderr) {
+                        if (error) {
+                            if (stderr) {
+                                if ((stderr.match(/\n/g) || []).length > 0) {
+                                    stderr = stderr.split("\n")
+                                }
+                            }
+                            event.sender.send('asynchronous-reply', 'definitionList', stderr);
+                        }
+                        else {
+                            if ((stdout.match(/\n/g) || []).length > 0) {
+                                stdout = stdout.split("\n")
+                            }
+                            event.sender.send('asynchronous-reply', 'definitionList', stdout);
+                        }
+                    });
+
+
+            }
         }
     }
 );
@@ -300,7 +328,7 @@ function createWindow() {
     appIcon = new Tray(__dirname + '/mad-hatter-hat-hi.png');
 
     //   appIcon = new Tray('./icon_48x48.png');
-    appIcon.setToolTip('Netflix Remote');
+    appIcon.setToolTip('Madhatter');
 
     // Create the browser window.
     mainWindow = new BrowserWindow({

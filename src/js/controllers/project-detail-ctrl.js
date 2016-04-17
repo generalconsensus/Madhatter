@@ -163,10 +163,6 @@ app.controller('ProjectDetailController', ['$rootScope', '$scope', '$stateParams
         $scope.testRunArray = [];
     };
 
-    //$scope.data = {
-    //text: "hello"
-    //};
-
     $scope.disabled = false;
     $scope.menu = [
         ['bold', 'italic', 'underline', 'strikethrough', 'subscript', 'superscript'],
