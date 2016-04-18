@@ -241,16 +241,15 @@ ipcMain.on('asynchronous-message', function (event, type, data) {
             if (data && data.file && data.fileData) {
                 fs.writeFile(data.file, data.fileData, 'utf8', function (err) {
                     if (err) {
-                        event.sender.send('asynchronous-reply', 'saveFile', null);
+                        event.sender.send('asynchronous-reply', 'saveFile', {result: null, run: data.run});
                     }
                     else {
-                        event.sender.send('asynchronous-reply', 'saveFile', true);
+                        event.sender.send('asynchronous-reply', 'saveFile', {result: true, run: data.run});
                     }
                 })
             }
         } else if (type == 'definitionList') {
             if (data) {
-                console.log(data);
                 var defExecFile = require('child_process').execFile;
 
                     var configOpt = '-dl',

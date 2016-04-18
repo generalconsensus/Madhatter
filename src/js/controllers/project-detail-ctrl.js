@@ -190,7 +190,7 @@ app.controller('ProjectDetailController', ['$rootScope', '$scope', '$stateParams
         $event.stopPropagation();
 
         if (node.name) {
-            var params = {fileNode: node, project: $scope.project};
+            var params = {fileNode: node, project: $scope.project, profiles: $scope.profiles, defaultProfile: $scope.profileCheckbox};
             $state.go('fileEditor', params);
 
             for (var key in $rootScope.navList) {

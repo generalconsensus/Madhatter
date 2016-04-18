@@ -27,7 +27,7 @@ app.config(['$stateProvider', '$urlRouterProvider',
             .state('fileEditor', {
                 url: '/fileEditor',
                 templateUrl: 'templates/fileEditor.html',
-                params: { fileNode: null, project: null },
+                params: { fileNode: null, project: null, profiles: null, defaultProfile: null },
                 animation: true
             });
 

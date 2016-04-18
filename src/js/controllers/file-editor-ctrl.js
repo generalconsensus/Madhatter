@@ -1,13 +1,15 @@
 app.controller('FileEditorController', ['$scope', '$stateParams', function ($scope, $stateParams) {
     $scope.project = $stateParams.project;
     $scope.file = $stateParams.fileNode;
+    $scope.profiles = $stateParams.profiles;
     $scope.fileData = '';
     $scope.definitionListing = [];
     $scope.disabled = false;
     $scope.menu = [];
     $scope.alerts = [];
     $scope.editor = {};
-
+    $scope.profileSelected = $stateParams.defaultProfile;
+    $scope.featureTest = '';
     $scope.setDisabled = function () {
         $scope.disabled = !$scope.disabled;
     };
@@ -35,8 +37,19 @@ app.controller('FileEditorController', ['$scope', '$stateParams', function ($sco
             });
             // Grab the directory tree listing for the feature folder
         } else if (type == 'saveFile') {
-            if (data) {
+            if (data.result) {
                 $scope.addAlert('File Saved', 'success');
+                // If we are running the file right after
+                if (data.run) {
+                    //Execute Feature
+                    ipcRenderer.send('asynchronous-message', 'node-exec', {
+                        features: $scope.project.featuresLocation + '/' + $scope.file.path,
+                        profile: $scope.profileSelected.key,
+                        profileLocation: $scope.project.profileLocation,
+                        projectLocation: $scope.project.projectLocation,
+                        id: $scope.project.key
+                    });
+                }
             } else {
                 $scope.addAlert('Error Saving File', 'danger');
             }
@@ -44,6 +57,12 @@ app.controller('FileEditorController', ['$scope', '$stateParams', function ($sco
             if (data) {
                 $scope.$apply(function () {
                     $scope.definitionListing = data;
+                });
+            }
+        } else if (type == 'node-exec') {
+            if (data) {
+                $scope.$apply(function () {
+                    $scope.featureTest = data;
                 });
             }
         }
@@ -76,7 +95,15 @@ app.controller('FileEditorController', ['$scope', '$stateParams', function ($sco
 
     $scope.save = function () {
         var file_path = $scope.project.featuresLocation + '/' + $scope.file.path;
-        ipcRenderer.send('asynchronous-message', 'saveFile', {file: file_path, fileData: $scope.fileData});
+        ipcRenderer.send('asynchronous-message', 'saveFile', {run: false, file: file_path, fileData: $scope.fileData});
+    };
+
+    $scope.saveRun = function (profileSelected) {
+        console.log(profileSelected);
+        var file_path = $scope.project.featuresLocation + '/' + $scope.file.path;
+        ipcRenderer.send('asynchronous-message', 'saveFile', {run: true, file: file_path, fileData: $scope.fileData});
+
+
     };
 
     $scope.insertDefintion = function (definition) {

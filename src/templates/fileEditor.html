@@ -7,6 +7,11 @@
                 <rd-widget-body classes="x-large no-padding">
                     <div ui-ace="aceOption" ng-model="fileData"></div>
                     <button class="btn btn-large btn-danger" ng-click="save()">Save</button>
+                    <div>Select Profile
+                        <select class="form-control ng-pristine ng-valid ng-not-empty ng-touched" ng-model="profileSelected" ng-options="profile as profile.key for profile in profiles track by profile.key">
+                        </select>
+                    </div>
+                    <button class="btn btn-large btn-danger" ng-click="saveRun(profileSelected)">Save and Run</button>
                 </rd-widget-body>
             </rd-widget>
         </div>
@@ -26,8 +31,11 @@
                             <tbody>
                             <tr ng-repeat="definition in definitionListing track by $index ">
                                 <td class="">{{ definition }}</td>
-                                <td>  <button class="btn btn-large btn-danger" ng-click="insertDefintion(definition)">Insert
-                                </button> </td>
+                                <td>
+                                    <button class="btn btn-large btn-danger" ng-click="insertDefintion(definition)">
+                                        Insert
+                                    </button>
+                                </td>
                             </tr>
                             </tbody>
                         </table>
