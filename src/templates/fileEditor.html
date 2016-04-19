@@ -1,4 +1,9 @@
 <div data-ng-controller="FileEditorController">
+    <uib-alert data-ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        {{alert.msg}}
+    </uib-alert>
+
     <div class="row">
         <div class="col-lg-6">
             <rd-widget>
@@ -6,12 +11,16 @@
                 </rd-widget-header>
                 <rd-widget-body classes="x-large no-padding">
                     <div ui-ace="aceOption" ng-model="fileData"></div>
-                    <button class="btn btn-large btn-danger" ng-click="save()">Save</button>
+                    <button class="btn btn-large btn-danger" ng-click="save(fileData)">Save</button>
                     <div>Select Profile
-                        <select class="form-control ng-pristine ng-valid ng-not-empty ng-touched" ng-model="profileSelected" ng-options="profile as profile.key for profile in profiles track by profile.key">
+                        <select class="form-control ng-pristine ng-valid ng-not-empty ng-touched"
+                                ng-model="profileSelected"
+                                ng-options="profile as profile.key for profile in profiles track by profile.key">
                         </select>
                     </div>
-                    <button class="btn btn-large btn-danger" ng-click="saveRun(profileSelected)">Save and Run</button>
+                    <button class="btn btn-large btn-danger" ng-click="saveRun(fileData, profileSelected)">Save and
+                        Run
+                    </button>
                 </rd-widget-body>
             </rd-widget>
         </div>
@@ -41,7 +50,7 @@
                         </table>
                     </div>
                 </rd-widget-body>
-                <rd-widget>
+                </rd-widget>
         </div>
     </div>
 </div>

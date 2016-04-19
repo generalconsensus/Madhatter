@@ -31,6 +31,9 @@ app.controller('FileEditorController', ['$scope', '$stateParams', function ($sco
     }
 
     ipcRenderer.on('asynchronous-reply', function (event, type, data) {
+        console.log(data);
+        console.log(type);
+
         if (type == 'fileEdit') {
             $scope.$apply(function () {
                 $scope.fileData = data.dataRaw;
@@ -61,6 +64,7 @@ app.controller('FileEditorController', ['$scope', '$stateParams', function ($sco
             }
         } else if (type == 'node-exec') {
             if (data) {
+                $scope.addAlert('Feature Success', 'success');
                 $scope.$apply(function () {
                     $scope.featureTest = data;
                 });
@@ -93,17 +97,14 @@ app.controller('FileEditorController', ['$scope', '$stateParams', function ($sco
         }
     };
 
-    $scope.save = function () {
+    $scope.save = function (fileData) {
         var file_path = $scope.project.featuresLocation + '/' + $scope.file.path;
-        ipcRenderer.send('asynchronous-message', 'saveFile', {run: false, file: file_path, fileData: $scope.fileData});
+        ipcRenderer.send('asynchronous-message', 'saveFile', {run: false, file: file_path, fileData: fileData});
     };
 
-    $scope.saveRun = function (profileSelected) {
-        console.log(profileSelected);
+    $scope.saveRun = function (fileData, profileSelected) {
         var file_path = $scope.project.featuresLocation + '/' + $scope.file.path;
-        ipcRenderer.send('asynchronous-message', 'saveFile', {run: true, file: file_path, fileData: $scope.fileData});
-
-
+        ipcRenderer.send('asynchronous-message', 'saveFile', {run: true, file: file_path, fileData: fileData});
     };
 
     $scope.insertDefintion = function (definition) {

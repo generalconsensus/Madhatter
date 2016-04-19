@@ -1,12 +1,9 @@
 <div data-ng-controller="ProjectDetailController">
+    <uib-alert data-ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        {{alert.msg}}
+    </uib-alert>
     <div class="col-xs-12">
-        <uib-alert data-ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">
-            <div class="alert alert-danger" role="alert">
-                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                <span class="sr-only">Error:</span>
-                {{alert.msg}}
-            </div>
-        </uib-alert>
     </div>
     <div class="row">
         <div class="col-lg-4 col-md-6 col-xs-12">

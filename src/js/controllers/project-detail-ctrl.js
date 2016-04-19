@@ -56,9 +56,17 @@ app.controller('ProjectDetailController', ['$rootScope', '$scope', '$stateParams
             }
             // Grab the Behat Test Results
         } else if (type == 'node-exec-reply') {
-            ipcRenderer.send('asynchronous-message', 'node-persist-project-test-lookup', {id: $scope.id});
+            //ipcRenderer.send('asynchronous-message', 'node-persist-project-test-lookup', {id: $scope.id});
+            if (data) {
+                $scope.$apply(function () {
+                    $scope.testRunArray.push(data.payload);
+                });
+            } else {
+                $scope.addAlert('Select a feature Folder or File to run begin running a test.', 'Error');
+            }
             // Grab the Project Tests
         } else if (type == 'node-persist-project-test-lookup') {
+            console.log(data);
             $scope.$apply(function () {
                 $scope.testRunArray = data;
             });

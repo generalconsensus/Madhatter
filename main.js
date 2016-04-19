@@ -56,7 +56,8 @@ ipcMain.on('asynchronous-message', function (event, type, data) {
                                 var parser = new xml2js.Parser();
 
                                 parser.parseString(fileData, function (err, parsedResult) {
-
+                                    console.log(err);
+                                    console.log(parsedResult);
                                     var result = parsedResult ? parsedResult : fileData;
                                     if (error) {
                                         if (stderr) {
@@ -74,7 +75,7 @@ ipcMain.on('asynchronous-message', function (event, type, data) {
                                             originalFile: original_filename[0] + '.feature'
                                         };
                                         cleanTestSave(data.id, payload);
-                                        event.sender.send('asynchronous-reply', 'node-exec-reply');
+                                        event.sender.send('asynchronous-reply', 'node-exec-reply', {payload: payload});
                                     }
                                     else {
                                         if (stdout && (stdout.match(/\n/g) || []).length > 0) {
@@ -89,7 +90,7 @@ ipcMain.on('asynchronous-message', function (event, type, data) {
                                             originalFile: original_filename
                                         };
                                         cleanTestSave(data.id, payload);
-                                        event.sender.send('asynchronous-reply', 'node-exec-reply');
+                                        event.sender.send('asynchronous-reply', 'node-exec-reply', {payload: payload});
 
                                     }
                                 });
